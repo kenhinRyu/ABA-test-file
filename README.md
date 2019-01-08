@@ -21,7 +21,7 @@
 75-80     6    DDMMYY, 的日期格式，0填充       后台用户点击生成ABA文件的日期，例：’080119‘，表示2019年1月8号。
 81-120    40        空                              未被使用
 
-第二行：detail record format （此处可以是多行，每行代表一笔提现交易记录）
+第二行：detail record format （此处可以是多行（500行以内），每行代表一笔提现交易记录）
 位置      长度      内容                              解释
 1         1        ‘1’                  记录类型，此处永远是‘1’，代表此行是detail record format
 2-8       7      XXX-XXX                          收款用户的BSB号码
@@ -29,7 +29,7 @@
 18        1        留空                            此处留空
 19-20     2        ‘50’                             交易代码
 21-30     10   右对齐，填充‘0’。交易金额        金额显示到分不需要小数点：例：一百澳元，显示为0000010000
-31-62     32    左对齐，填充空格                  收款账户名 （用户在Homepal系统中填写的其银行账户的账户名）
+31-62     32    左对齐，填充空格                  收款账户名 （用户在Homepal系统中填写的姓名：‘姓. 名’）
 63-80     18   左对齐，填充空格                         Homepal系统内的用户ID
 81-87      7    XXX-XXX                              支付失败时的退款BSB：永远是：‘063-010’
 88-96      9       右对齐，填充空格                           支付失败时的退款账号：永远是：‘013626730’
@@ -51,12 +51,6 @@
 
 EOF should be after 120th chracter of line 3. Everything below that is comments. Lines 6-7 are a ruler of sorts, showing
 the location of characters 1 - 120.
-
-LINE 1: Descriptive Record: file known as "ABA Test" from John Allan Smith BSB 067-102 Acct 12341234 process on
-        2013-04-07 at 15:30 through Commonwealth Bank (NetBank or ComBiz). This is the first file in the batch.
-LINE 2: Detail Record: $0.01 generic credit to Joan Emma Smith BSB 062-292 Acct 43214321 from "Mr John Smith" narration
-        "ABA Test CR". Will come from account 067-102 12341234. No withholding tax.
-LINE 3: Batch Control Record: total credits of $0.01 total debits nil net total $0.01 and total number of records 1.
 
 File must be CR/LF delimited fixed width (each line must be 120 characters).
 
